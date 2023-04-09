@@ -1,10 +1,11 @@
 
+import apiKey from './apiKey.js';
 const recipeForm = document.getElementById('Recipe-form');
 
 //search recipe in spoonacular
 function spoonacularRecipeSearch(){
     const recipe = document.querySelector('#search').value;
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=b98e2b363efa4d5496ff9ee6b90ac228&query=${recipe}`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${recipe}`)
         .then(resp => resp.json())
         .then(recipeData => recipeSearch(recipeData))
         .catch(error => console.log(error))
@@ -17,7 +18,7 @@ function recipeSearch(recipeData){
         const recipeItem = document.createElement('li');
 
         // A separate API call to get the recipe information and extract the ingredients and preparation steps
-        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=b98e2b363efa4d5496ff9ee6b90ac228`)
+        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${apiKey}`)
             .then(resp => resp.json())
             .then(recipeInfo => {
                 let ingredientList = '';
