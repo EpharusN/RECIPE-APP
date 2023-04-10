@@ -1,11 +1,11 @@
 
-import apiKey from './apiKey.js';
 const recipeForm = document.getElementById('Recipe-form');
+const apiKey = "b98e2b363efa4d5496ff9ee6b90ac22";
 
 //search recipe in spoonacular
 function spoonacularRecipeSearch(){
     const recipe = document.querySelector('#search').value;
-    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${recipe}`)
+    fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=b98e2b363efa4d5496ff9ee6b90ac228&query=${recipe}`)
         .then(resp => resp.json())
         .then(recipeData => recipeSearch(recipeData))
         .catch(error => console.log(error))
@@ -18,7 +18,7 @@ function recipeSearch(recipeData){
         const recipeItem = document.createElement('li');
 
         // A separate API call to get the recipe information and extract the ingredients and preparation steps
-        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=${apiKey}`)
+        fetch(`https://api.spoonacular.com/recipes/${recipe.id}/information?apiKey=b98e2b363efa4d5496ff9ee6b90ac228`)
             .then(resp => resp.json())
             .then(recipeInfo => {
                 let ingredientList = '';
@@ -45,10 +45,10 @@ function recipeSearch(recipeData){
                     <ol>${preparationSteps}</ol>
                     <p><a href="${recipeInfo.spoonacularSourceUrl}" target="_blank">Click here for full recipe instructions</a></p>
                 `;
+
+                recipeList.appendChild(recipeItem);
             })
             .catch(error => console.log(error));
-
-        recipeList.appendChild(recipeItem);
     })
 }
 
@@ -58,10 +58,4 @@ document.addEventListener('DOMContentLoaded', () => {
         spoonacularRecipeSearch();
     });
 });
-
-// return recipe
-spoonacularRecipeSearch();
-
-
-
 
